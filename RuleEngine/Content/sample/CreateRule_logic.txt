@@ -1,0 +1,264 @@
+﻿<?xml version="1.0" encoding="utf-8"?><RuleSet Description="{p1:Null}" Name="{p1:Null}" ChainingBehavior="Full" xmlns:p1="http://schemas.microsoft.com/winfx/2006/xaml" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/workflow">
+	<RuleSet.Rules>
+		<Rule Priority="0" ReevaluationBehavior="Always" Description="{p1:Null}" Active="True" Name="コードで作成したルール">
+			<Rule.Condition>
+				<RuleExpressionCondition Name="{p1:Null}">
+					<RuleExpressionCondition.Expression>
+						<ns0:CodeBinaryOperatorExpression Operator="BooleanAnd" xmlns:ns0="clr-namespace:System.CodeDom;Assembly=System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+							<ns0:CodeBinaryOperatorExpression.Right>
+								<ns0:CodeBinaryOperatorExpression Operator="GreaterThanOrEqual">
+									<ns0:CodeBinaryOperatorExpression.Right>
+										<ns0:CodePrimitiveExpression>
+											<ns0:CodePrimitiveExpression.Value>
+												<ns1:Int32 xmlns:ns1="clr-namespace:System;Assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">100</ns1:Int32>
+											</ns0:CodePrimitiveExpression.Value>
+										</ns0:CodePrimitiveExpression>
+									</ns0:CodeBinaryOperatorExpression.Right>
+									<ns0:CodeBinaryOperatorExpression.Left>
+										<ns0:CodePropertyReferenceExpression PropertyName="administrationCosts">
+											<ns0:CodePropertyReferenceExpression.TargetObject>
+												<ns0:CodeThisReferenceExpression />
+											</ns0:CodePropertyReferenceExpression.TargetObject>
+										</ns0:CodePropertyReferenceExpression>
+									</ns0:CodeBinaryOperatorExpression.Left>
+								</ns0:CodeBinaryOperatorExpression>
+							</ns0:CodeBinaryOperatorExpression.Right>
+							<ns0:CodeBinaryOperatorExpression.Left>
+								<ns0:CodeBinaryOperatorExpression Operator="GreaterThan">
+									<ns0:CodeBinaryOperatorExpression.Right>
+										<ns0:CodePropertyReferenceExpression PropertyName="upperLimit">
+											<ns0:CodePropertyReferenceExpression.TargetObject>
+												<ns0:CodeThisReferenceExpression />
+											</ns0:CodePropertyReferenceExpression.TargetObject>
+										</ns0:CodePropertyReferenceExpression>
+									</ns0:CodeBinaryOperatorExpression.Right>
+									<ns0:CodeBinaryOperatorExpression.Left>
+										<ns0:CodePropertyReferenceExpression PropertyName="nextMonthRent">
+											<ns0:CodePropertyReferenceExpression.TargetObject>
+												<ns0:CodeThisReferenceExpression />
+											</ns0:CodePropertyReferenceExpression.TargetObject>
+										</ns0:CodePropertyReferenceExpression>
+									</ns0:CodeBinaryOperatorExpression.Left>
+								</ns0:CodeBinaryOperatorExpression>
+							</ns0:CodeBinaryOperatorExpression.Left>
+						</ns0:CodeBinaryOperatorExpression>
+					</RuleExpressionCondition.Expression>
+				</RuleExpressionCondition>
+			</Rule.Condition>
+			<Rule.ThenActions>
+				<RuleStatementAction>
+					<RuleStatementAction.CodeDomStatement>
+						<ns0:CodeAssignStatement LinePragma="{p1:Null}" xmlns:ns0="clr-namespace:System.CodeDom;Assembly=System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+							<ns0:CodeAssignStatement.Left>
+								<ns0:CodePropertyReferenceExpression PropertyName="CampanyBurden">
+									<ns0:CodePropertyReferenceExpression.TargetObject>
+										<ns0:CodeThisReferenceExpression />
+									</ns0:CodePropertyReferenceExpression.TargetObject>
+								</ns0:CodePropertyReferenceExpression>
+							</ns0:CodeAssignStatement.Left>
+							<ns0:CodeAssignStatement.Right>
+								<ns0:CodeBinaryOperatorExpression Operator="Multiply">
+									<ns0:CodeBinaryOperatorExpression.Right>
+										<ns0:CodeBinaryOperatorExpression Operator="Subtract">
+											<ns0:CodeBinaryOperatorExpression.Right>
+												<ns0:CodePropertyReferenceExpression PropertyName="PersonalBurdenRate">
+													<ns0:CodePropertyReferenceExpression.TargetObject>
+														<ns0:CodeThisReferenceExpression />
+													</ns0:CodePropertyReferenceExpression.TargetObject>
+												</ns0:CodePropertyReferenceExpression>
+											</ns0:CodeBinaryOperatorExpression.Right>
+											<ns0:CodeBinaryOperatorExpression.Left>
+												<ns0:CodePrimitiveExpression>
+													<ns0:CodePrimitiveExpression.Value>
+														<ns1:Int32 xmlns:ns1="clr-namespace:System;Assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">1</ns1:Int32>
+													</ns0:CodePrimitiveExpression.Value>
+												</ns0:CodePrimitiveExpression>
+											</ns0:CodeBinaryOperatorExpression.Left>
+										</ns0:CodeBinaryOperatorExpression>
+									</ns0:CodeBinaryOperatorExpression.Right>
+									<ns0:CodeBinaryOperatorExpression.Left>
+										<ns0:CodePropertyReferenceExpression PropertyName="upperLimit">
+											<ns0:CodePropertyReferenceExpression.TargetObject>
+												<ns0:CodeThisReferenceExpression />
+											</ns0:CodePropertyReferenceExpression.TargetObject>
+										</ns0:CodePropertyReferenceExpression>
+									</ns0:CodeBinaryOperatorExpression.Left>
+								</ns0:CodeBinaryOperatorExpression>
+							</ns0:CodeAssignStatement.Right>
+						</ns0:CodeAssignStatement>
+					</RuleStatementAction.CodeDomStatement>
+				</RuleStatementAction>
+				<RuleStatementAction>
+					<RuleStatementAction.CodeDomStatement>
+						<ns0:CodeAssignStatement LinePragma="{p1:Null}" xmlns:ns0="clr-namespace:System.CodeDom;Assembly=System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+							<ns0:CodeAssignStatement.Left>
+								<ns0:CodePropertyReferenceExpression PropertyName="PersonalBurden">
+									<ns0:CodePropertyReferenceExpression.TargetObject>
+										<ns0:CodeThisReferenceExpression />
+									</ns0:CodePropertyReferenceExpression.TargetObject>
+								</ns0:CodePropertyReferenceExpression>
+							</ns0:CodeAssignStatement.Left>
+							<ns0:CodeAssignStatement.Right>
+								<ns0:CodeBinaryOperatorExpression Operator="Add">
+									<ns0:CodeBinaryOperatorExpression.Right>
+										<ns0:CodePropertyReferenceExpression PropertyName="administrationCosts">
+											<ns0:CodePropertyReferenceExpression.TargetObject>
+												<ns0:CodeThisReferenceExpression />
+											</ns0:CodePropertyReferenceExpression.TargetObject>
+										</ns0:CodePropertyReferenceExpression>
+									</ns0:CodeBinaryOperatorExpression.Right>
+									<ns0:CodeBinaryOperatorExpression.Left>
+										<ns0:CodeBinaryOperatorExpression Operator="Subtract">
+											<ns0:CodeBinaryOperatorExpression.Right>
+												<ns0:CodePropertyReferenceExpression PropertyName="CampanyBurden">
+													<ns0:CodePropertyReferenceExpression.TargetObject>
+														<ns0:CodeThisReferenceExpression />
+													</ns0:CodePropertyReferenceExpression.TargetObject>
+												</ns0:CodePropertyReferenceExpression>
+											</ns0:CodeBinaryOperatorExpression.Right>
+											<ns0:CodeBinaryOperatorExpression.Left>
+												<ns0:CodePropertyReferenceExpression PropertyName="nextMonthRent">
+													<ns0:CodePropertyReferenceExpression.TargetObject>
+														<ns0:CodeThisReferenceExpression />
+													</ns0:CodePropertyReferenceExpression.TargetObject>
+												</ns0:CodePropertyReferenceExpression>
+											</ns0:CodeBinaryOperatorExpression.Left>
+										</ns0:CodeBinaryOperatorExpression>
+									</ns0:CodeBinaryOperatorExpression.Left>
+								</ns0:CodeBinaryOperatorExpression>
+							</ns0:CodeAssignStatement.Right>
+						</ns0:CodeAssignStatement>
+					</RuleStatementAction.CodeDomStatement>
+				</RuleStatementAction>
+				<RuleStatementAction>
+					<RuleStatementAction.CodeDomStatement>
+						<ns0:CodeAssignStatement LinePragma="{p1:Null}" xmlns:ns0="clr-namespace:System.CodeDom;Assembly=System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+							<ns0:CodeAssignStatement.Left>
+								<ns0:CodePropertyReferenceExpression PropertyName="calcResult">
+									<ns0:CodePropertyReferenceExpression.TargetObject>
+										<ns0:CodeThisReferenceExpression />
+									</ns0:CodePropertyReferenceExpression.TargetObject>
+								</ns0:CodePropertyReferenceExpression>
+							</ns0:CodeAssignStatement.Left>
+							<ns0:CodeAssignStatement.Right>
+								<ns0:CodeBinaryOperatorExpression Operator="Divide">
+									<ns0:CodeBinaryOperatorExpression.Right>
+										<ns0:CodePrimitiveExpression>
+											<ns0:CodePrimitiveExpression.Value>
+												<ns1:Int32 xmlns:ns1="clr-namespace:System;Assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">3</ns1:Int32>
+											</ns0:CodePrimitiveExpression.Value>
+										</ns0:CodePrimitiveExpression>
+									</ns0:CodeBinaryOperatorExpression.Right>
+									<ns0:CodeBinaryOperatorExpression.Left>
+										<ns0:CodeBinaryOperatorExpression Operator="Multiply">
+											<ns0:CodeBinaryOperatorExpression.Right>
+												<ns0:CodePrimitiveExpression>
+													<ns0:CodePrimitiveExpression.Value>
+														<ns1:Int32 xmlns:ns1="clr-namespace:System;Assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">300</ns1:Int32>
+													</ns0:CodePrimitiveExpression.Value>
+												</ns0:CodePrimitiveExpression>
+											</ns0:CodeBinaryOperatorExpression.Right>
+											<ns0:CodeBinaryOperatorExpression.Left>
+												<ns0:CodePrimitiveExpression>
+													<ns0:CodePrimitiveExpression.Value>
+														<ns1:Int32 xmlns:ns1="clr-namespace:System;Assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">5</ns1:Int32>
+													</ns0:CodePrimitiveExpression.Value>
+												</ns0:CodePrimitiveExpression>
+											</ns0:CodeBinaryOperatorExpression.Left>
+										</ns0:CodeBinaryOperatorExpression>
+									</ns0:CodeBinaryOperatorExpression.Left>
+								</ns0:CodeBinaryOperatorExpression>
+							</ns0:CodeAssignStatement.Right>
+						</ns0:CodeAssignStatement>
+					</RuleStatementAction.CodeDomStatement>
+				</RuleStatementAction>
+			</Rule.ThenActions>
+			<Rule.ElseActions>
+				<RuleStatementAction>
+					<RuleStatementAction.CodeDomStatement>
+						<ns0:CodeAssignStatement LinePragma="{p1:Null}" xmlns:ns0="clr-namespace:System.CodeDom;Assembly=System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+							<ns0:CodeAssignStatement.Left>
+								<ns0:CodePropertyReferenceExpression PropertyName="CampanyBurden">
+									<ns0:CodePropertyReferenceExpression.TargetObject>
+										<ns0:CodeThisReferenceExpression />
+									</ns0:CodePropertyReferenceExpression.TargetObject>
+								</ns0:CodePropertyReferenceExpression>
+							</ns0:CodeAssignStatement.Left>
+							<ns0:CodeAssignStatement.Right>
+								<ns0:CodeBinaryOperatorExpression Operator="Multiply">
+									<ns0:CodeBinaryOperatorExpression.Right>
+										<ns0:CodeBinaryOperatorExpression Operator="Subtract">
+											<ns0:CodeBinaryOperatorExpression.Right>
+												<ns0:CodePropertyReferenceExpression PropertyName="PersonalBurdenRate">
+													<ns0:CodePropertyReferenceExpression.TargetObject>
+														<ns0:CodeThisReferenceExpression />
+													</ns0:CodePropertyReferenceExpression.TargetObject>
+												</ns0:CodePropertyReferenceExpression>
+											</ns0:CodeBinaryOperatorExpression.Right>
+											<ns0:CodeBinaryOperatorExpression.Left>
+												<ns0:CodePrimitiveExpression>
+													<ns0:CodePrimitiveExpression.Value>
+														<ns1:Int32 xmlns:ns1="clr-namespace:System;Assembly=mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">1</ns1:Int32>
+													</ns0:CodePrimitiveExpression.Value>
+												</ns0:CodePrimitiveExpression>
+											</ns0:CodeBinaryOperatorExpression.Left>
+										</ns0:CodeBinaryOperatorExpression>
+									</ns0:CodeBinaryOperatorExpression.Right>
+									<ns0:CodeBinaryOperatorExpression.Left>
+										<ns0:CodePropertyReferenceExpression PropertyName="nextMonthRent">
+											<ns0:CodePropertyReferenceExpression.TargetObject>
+												<ns0:CodeThisReferenceExpression />
+											</ns0:CodePropertyReferenceExpression.TargetObject>
+										</ns0:CodePropertyReferenceExpression>
+									</ns0:CodeBinaryOperatorExpression.Left>
+								</ns0:CodeBinaryOperatorExpression>
+							</ns0:CodeAssignStatement.Right>
+						</ns0:CodeAssignStatement>
+					</RuleStatementAction.CodeDomStatement>
+				</RuleStatementAction>
+				<RuleStatementAction>
+					<RuleStatementAction.CodeDomStatement>
+						<ns0:CodeAssignStatement LinePragma="{p1:Null}" xmlns:ns0="clr-namespace:System.CodeDom;Assembly=System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+							<ns0:CodeAssignStatement.Left>
+								<ns0:CodePropertyReferenceExpression PropertyName="PersonalBurden">
+									<ns0:CodePropertyReferenceExpression.TargetObject>
+										<ns0:CodeThisReferenceExpression />
+									</ns0:CodePropertyReferenceExpression.TargetObject>
+								</ns0:CodePropertyReferenceExpression>
+							</ns0:CodeAssignStatement.Left>
+							<ns0:CodeAssignStatement.Right>
+								<ns0:CodeBinaryOperatorExpression Operator="Add">
+									<ns0:CodeBinaryOperatorExpression.Right>
+										<ns0:CodePropertyReferenceExpression PropertyName="administrationCosts">
+											<ns0:CodePropertyReferenceExpression.TargetObject>
+												<ns0:CodeThisReferenceExpression />
+											</ns0:CodePropertyReferenceExpression.TargetObject>
+										</ns0:CodePropertyReferenceExpression>
+									</ns0:CodeBinaryOperatorExpression.Right>
+									<ns0:CodeBinaryOperatorExpression.Left>
+										<ns0:CodeBinaryOperatorExpression Operator="Multiply">
+											<ns0:CodeBinaryOperatorExpression.Right>
+												<ns0:CodePropertyReferenceExpression PropertyName="PersonalBurdenRate">
+													<ns0:CodePropertyReferenceExpression.TargetObject>
+														<ns0:CodeThisReferenceExpression />
+													</ns0:CodePropertyReferenceExpression.TargetObject>
+												</ns0:CodePropertyReferenceExpression>
+											</ns0:CodeBinaryOperatorExpression.Right>
+											<ns0:CodeBinaryOperatorExpression.Left>
+												<ns0:CodePropertyReferenceExpression PropertyName="nextMonthRent">
+													<ns0:CodePropertyReferenceExpression.TargetObject>
+														<ns0:CodeThisReferenceExpression />
+													</ns0:CodePropertyReferenceExpression.TargetObject>
+												</ns0:CodePropertyReferenceExpression>
+											</ns0:CodeBinaryOperatorExpression.Left>
+										</ns0:CodeBinaryOperatorExpression>
+									</ns0:CodeBinaryOperatorExpression.Left>
+								</ns0:CodeBinaryOperatorExpression>
+							</ns0:CodeAssignStatement.Right>
+						</ns0:CodeAssignStatement>
+					</RuleStatementAction.CodeDomStatement>
+				</RuleStatementAction>
+			</Rule.ElseActions>
+		</Rule>
+	</RuleSet.Rules>
+</RuleSet>

@@ -1,0 +1,124 @@
+﻿<?xml version="1.0"?>
+<doc>
+<assembly>
+<name>
+RuleEngine
+</name>
+</assembly>
+<members>
+<member name="T:RuleEngine.My.Resources.Resources">
+<summary>
+  ローカライズされた文字列などを検索するための、厳密に型指定されたリソース クラスです。
+</summary>
+</member>
+<member name="P:RuleEngine.My.Resources.Resources.ResourceManager">
+<summary>
+  このクラスで使用されているキャッシュされた ResourceManager インスタンスを返します。
+</summary>
+</member>
+<member name="P:RuleEngine.My.Resources.Resources.Culture">
+<summary>
+  厳密に型指定されたこのリソース クラスを使用して、すべての検索リソースに対し、
+  現在のスレッドの CurrentUICulture プロパティをオーバーライドします。
+</summary>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.ruleRead(System.String)">
+ <summary>
+ 指定のルールファイルを読み込むサンプル
+ </summary>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.ruleWrite(System.Workflow.Activities.Rules.RuleSet,System.String)">
+ <summary>
+ ルールをXmlにしてファイルに保存するサンプル
+ </summary>
+ <param name="ruleSet"></param>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.executeRule(System.Workflow.Activities.Rules.RuleSet,System.Object)">
+ <summary>
+ ルールとファクト(要素)を与えて、実行
+ </summary>
+ <param name="ruleSet"></param>
+ <param name="fact"></param>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.PrintProperties(RuleEngine.UsageFee)">
+ <summary>
+ 印字
+ </summary>
+ <param name="myUsageFee"></param>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.ruleCreate">
+ <summary>
+ 自前でルール作成 (Createrの元ネタに使う予定)
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.createRuleSet">
+ <summary>
+ RuleSetを作成
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.CreateCondition(System.CodeDom.CodeThisReferenceExpression)">
+ <summary>
+ Conditionの作成
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.CreateThenAction(System.CodeDom.CodeThisReferenceExpression)">
+ <summary>
+ Then Actionを構築
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.CreateElseAction(System.CodeDom.CodeThisReferenceExpression)">
+ <summary>
+ Else Actionを構築
+ </summary>
+ <returns></returns>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.calcTest(System.CodeDom.CodeThisReferenceExpression)">
+ <summary>
+ 計算式検証用Action作成
+ </summary>
+ <param name="thisRef"></param>
+ <returns></returns>
+</member>
+<member name="M:RuleEngine.RuleSampleMain.calcTest2(System.CodeDom.CodeThisReferenceExpression)">
+ <summary>
+ 計算式検証用Action作成その2
+ </summary>
+ <param name="thisRef"></param>
+ <returns></returns>
+</member>
+<member name="M:RuleEngine.UnitTest1.TestMethod1">
+ <summary>
+ GUIで作成したルールファイルを使って、ルールの読込と値を入れての実行テスト
+ ↓こんなログが出ます
+ DefaultSource Information: 0 : member = 借上さん
+ DefaultSource Information :  0 : nextMonthRent = 12
+ DefaultSource Information :  0 : administrationCosts = 100
+ DefaultSource Information :  0 : upperLimit = 100000
+ DefaultSource Information :  0 : PersonalBurdenRate = 0.2
+ DefaultSource Information :  0 : CampanyBurden = 9.6
+ DefaultSource Information :  0 : PersonalBurden = 102.4
+ DefaultSource Information :  0 : calcResult = 0
+ DefaultSource Information :  0 : 個人負担額 = 102.4
+ </summary>
+</member>
+<member name="M:RuleEngine.UnitTest1.TestMethod2">
+ <summary>
+ 独自にルールをくみ上げて、ルールの実行と保存のテスト
+ ↓こんなログが出ます
+ DefaultSource Information: 0 : member = 借上さん
+ DefaultSource Information :  0 : nextMonthRent = 12
+ DefaultSource Information :  0 : administrationCosts = 100
+ DefaultSource Information :  0 : upperLimit = 100000
+ DefaultSource Information :  0 : PersonalBurdenRate = 0.2
+ DefaultSource Information :  0 : CampanyBurden = 9.6
+ DefaultSource Information :  0 : PersonalBurden = 102.4
+ DefaultSource Information :  0 : calcResult = 0
+ DefaultSource Information :  0 : 個人負担額 = 102.4
+ </summary>
+</member>
+</members>
+</doc>

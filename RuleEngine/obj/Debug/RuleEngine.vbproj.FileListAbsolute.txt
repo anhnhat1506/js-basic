@@ -1,0 +1,10 @@
+D:\Programm\uis\kariage_app\RuleEngine\bin\Debug\RuleEngine.dll.config
+D:\Programm\uis\kariage_app\RuleEngine\bin\Debug\RuleEngine.dll
+D:\Programm\uis\kariage_app\RuleEngine\bin\Debug\RuleEngine.pdb
+D:\Programm\uis\kariage_app\RuleEngine\bin\Debug\RuleEngine.xml
+D:\Programm\uis\kariage_app\RuleEngine\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\Programm\uis\kariage_app\RuleEngine\obj\Debug\RuleEngine.Resources.resources
+D:\Programm\uis\kariage_app\RuleEngine\obj\Debug\RuleEngine.vbproj.GenerateResource.Cache
+D:\Programm\uis\kariage_app\RuleEngine\obj\Debug\RuleEngine.dll
+D:\Programm\uis\kariage_app\RuleEngine\obj\Debug\RuleEngine.xml
+D:\Programm\uis\kariage_app\RuleEngine\obj\Debug\RuleEngine.pdb
