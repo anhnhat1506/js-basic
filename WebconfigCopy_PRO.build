@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="WebConfig copy" default="build" basedir=".">
+
+  <!--
+  以下のプロパティは外部から指定
+  webConfigSourceFile : コピー対象のweb.config
+  tenantSettingFile   : テナント向け設定ファイル(csv形式)
+  webConfigTargetDir  : web.config出力先
+  -->
+
+  <!-- メイン処理 -->
+  <target name="build">
+
+    <!-- 共通設定の変更 -->
+  　<call target="changeCommonProperties" />
+
+
+
+    <property name="i" value="0" />
+    <foreach item="Line" in="${tenantSettingFile}" delim="," property="tenantId,tenantName,serverName,dbHost,appUrl,mnUrl,pwdMin,pwdMax,pwdPtn,pwdMsg,pwdTerm">
+      <!-- 行数 -->
+      <property name="i" value="${int::parse(i) + 1}" />
+
+      <!-- 1行目をスキップ -->
+      <if test="${int::parse(i) > 1}">
+
+        <!-- TODO ファイルから読み込んだ列分用意 -->
+        <property name="tenantId" value="${tenantId}" />
+        <property name="tenantName" value="${tenantName}" />
+        <property name="serverName" value="${serverName}" />
+        <property name="dbHost" value="${dbHost}" />
+        <property name="dbName" value="${tenantId}" />
+        <property name="dbUser" value="${tenantId}" />
+        <property name="dbPwd" value="p${tenantId}" />
+        <property name="appUrl" value="${appUrl}" />
+        <property name="mnUrl" value="${mnUrl}" />
+        <property name="pwdMin" value="${pwdMin}" />
+        <property name="pwdMax" value="${pwdMax}" />
+        <property name="pwdPtn" value="${pwdPtn}" />
+        <property name="pwdMsg" value="${pwdMsg}" />
+        <property name="pwdTerm" value="${pwdTerm}" />
+
+        <!-- コピー先ファイル名 TODO 出力先 -->
+        <property name="WebConfigTarget" value="${webConfigTargetDir}\${serverName}\${tenantId}.web.config" />
+
+        <!-- コピー -->
+        <call target="copyFile" />
+
+        <!-- web.configの設定情報を変更 -->
+        <call target="changeProperties" />
+      </if>
+    </foreach>
+
+  </target>
+
+  <!-- コピー -->
+  <target name="copyFile">
+    <copy file="${webConfigSourceFile}" tofile="${WebConfigTarget}" />
+  </target>
+
+  <!-- web.configの設定情報を変更 -->
+  <!--
+  例として"自身のURL"を変更している
+  <add key="CurrentUrl" value="http://uissva10/kariage" />
+  ⇒<add key="CurrentUrl" value="http://uissva10/kariage/テナントID" />
+  -->
+  <target name="changeCommonProperties">
+     <!-- メール関連 -->
+     <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/appSettings/add[@key='FromAdress']/@value"
+       value="${fromAdress}" />
+     <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/appSettings/add[@key='FromName']/@value"
+       value="${fromName}" />
+     <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/appSettings/add[@key='SmtpHost']/@value"
+       value="${smtpHost}" />
+     <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/appSettings/add[@key='SmtpPort']/@value"
+       value="${smtpPort}" />
+     <!-- パスワード変更期限 -->
+     <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/appSettings/add[@key='FirstRegistrationPwdExpireDate']/@value"
+       value="${firstRegistrationPwdExpireDate}" />
+     <!-- UISグローバルIP -->
+     <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/appSettings/add[@key='Uis_IpAddress']/@value"
+       value="${uisIP}" />
+     <!-- log4net メール送信先 -->
+     <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/log4net/appender[@name='AppErrorLogMail']/param[@name='To']/@value"
+       value="${toAdress}" />
+     <!-- log4net ファイル出力レベル -->
+     <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/log4net/appender[@name='RollingFileAppender']/filter[@type='log4net.Filter.LevelRangeFilter']/param[@name='LevelMin']/@value"
+       value="${loglevel}" />
+     <!-- log4net ファイル出力に変更 -->
+    <!-- <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/log4net/category[@name='Kariage']/appender-ref/@ref"
+       value="RollingFileAppender" />-->
+    <!-- log4net appender指定 -->
+    <!-- <xmlpoke
+       file="${webConfigSourceFile}"
+       xpath="/configuration/log4net/root/appender-ref/@ref"
+       value="${appender}" />-->
+    
+  </target>
+
+  <target name="changeProperties">
+
+    <!-- 上書き対象の値を取得 -->
+    <xmlpeek file="${webConfigSourceFile}" xpath="/configuration/appSettings/add[@key = 'CurrentUrl']/@value" property="currentUrlOrg" />
+
+    <!-- 置換 -->
+    <!-- appSettings -->
+   <xmlpoke file="${WebConfigTarget}" xpath="/configuration/appSettings/add[@key = 'CurrentUrl']/@value" value="https://wmas.kariage.jp/${serverName}/${appUrl}" />
+   <xmlpoke file="${WebConfigTarget}" xpath="/configuration/appSettings/add[@key = 'MnWebApiUrl']/@value" value="${mnUrl}" />
+   <xmlpoke file="${WebConfigTarget}" xpath="/configuration/appSettings/add[@key = 'UploadFileTempDir']/@value" value="C:/App/${tenantId}/Temp" />
+   <xmlpoke file="${WebConfigTarget}" xpath="/configuration/appSettings/add[@key = 'MinLength']/@value" value="${pwdMin}" />
+   <xmlpoke file="${WebConfigTarget}" xpath="/configuration/appSettings/add[@key = 'MaxLength']/@value" value="${pwdMax}" />
+   <xmlpoke file="${WebConfigTarget}" xpath="/configuration/appSettings/add[@key = 'Pattern']/@value" value="${pwdPtn}" />
+   <xmlpoke file="${WebConfigTarget}" xpath="/configuration/appSettings/add[@key = 'PatternMsg']/@value" value="${pwdMsg}" />
+   <xmlpoke file="${WebConfigTarget}" xpath="/configuration/appSettings/add[@key = 'ExpirationLength']/@value" value="${pwdTerm}" />
+ 
+    <!-- ConnectionString -->
+    <xmlpoke
+			file="${WebConfigTarget}"
+			xpath="/configuration/connectionStrings/add[@name='ConnectionString']/@connectionString"
+			value="Data Source=${dbHost};Initial Catalog=${dbName};Integrated Security=True;MultipleActiveResultSets=True;" />
+
+    <!-- log4net ログ出力先 -->
+    <xmlpoke
+			file="${WebConfigTarget}"
+			xpath="/configuration/log4net/appender[@name = 'RollingFileAppender']/param[@name = 'File']/@value"
+			value="C:/App/${tenantId}/logs/" />
+
+  </target>
+
+</project>

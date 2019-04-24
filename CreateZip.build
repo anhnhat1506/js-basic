@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<project name="create zip file" default="build" basedir=".">
+
+  <!--
+  以下のプロパティは外部から指定
+  webAppSourceDir     : Webアプリモジュール格納先
+  webConfigSourceDir  : web.config格納先
+  targetDir           : 出力先
+  gitTagName          : パラメータで指定したGitタグ名
+  -->
+
+  <!-- メイン処理 -->
+  <target name="build">
+
+    <!-- zipファイル作成 -->
+    <call target="createZipFile" />
+
+  </target>
+
+  <!-- zipファイル作成 -->
+  <target name="createZipFile">
+
+    <!-- サーバーごとにweb.config,webappフォルダをzip化する -->
+    <foreach item="Folder" in="${webConfigSourceDir}" property="folderAbsolutelyPath">
+      <regex pattern="^(.*\\)(?'folderName'.+)$" input="${folderAbsolutelyPath}" />
+
+      <!-- kariage_サーバー名.zipファイル作成 -->
+      <zip zipfile="${targetDir}\${gitTagName}_kariage_${folderName}.zip">
+        <fileset basedir="${webConfigSourceDir}\${folderName}" prefix="config">
+          <include name="**/*.config" />
+        </fileset>
+　      <fileset basedir="${webAppSourceDir}" prefix="webapp">
+  　      <include name="**/*" />
+    　  </fileset>
+      </zip>
+
+      <!-- web.configを削除 -->
+      <delete dir="${webConfigSourceDir}\${folderName}" />
+    </foreach>
+  </target>
+
+</project>
